@@ -1,0 +1,19 @@
+main()
+{
+	int a,b;
+	char c,d;
+	assign c = a+b;
+	if(a<b) then
+	{
+		int a,e,f;
+		char a;
+	}
+	else
+	{
+	int a;
+	};
+	while((a+b)>(c+d))
+	{
+		char k;
+	};
+}

@@ -1,0 +1,2011 @@
+Terminals unused in grammar
+
+   MACRO
+   TYPEDEF
+   GLOBAL
+   AMP
+   BOOL_DATATYPE
+   DATATYPE
+   NEGATIVENUMBER
+   MOD
+   FOR
+   DO
+   BREAK
+   CONTINUE
+   GOTO
+
+
+State 113 conflicts: 1 shift/reduce
+
+
+Grammar
+
+    0 $accept: prog $end
+
+    1 $@1: %empty
+
+    2 $@2: %empty
+
+    3 $@3: %empty
+
+    4 prog: $@1 fn_def MAIN $@2 rlb rrb clb $@3 stmt_list crb
+
+    5 var_decl: datatype exps
+
+    6 @4: %empty
+
+    7 exps: ID @4 exps_prime
+
+    8 exps_prime: comma_exps
+    9           | slb DIGITS srb comma_exps
+
+   10 comma_exps: %empty
+   11           | comma exps
+
+   12 stmt_list: %empty
+   13          | stmt semi_colon stmt_list
+
+   14 stmt: var_decl
+   15     | assignment
+   16     | cond_loop
+   17     | fn_call
+
+   18 assignment: %empty
+
+   19 $@5: %empty
+
+   20 assignment: ID $@5 EQ assignment_prime
+
+   21 assignment_prime: id_or_digits
+   22                 | fn_call
+
+   23 expressions: expr_rel
+   24            | expr_binary
+
+   25 expr_rel: op relop op
+
+   26 op: id_or_digits
+   27   | rlb expressions rrb
+
+   28 expr_binary: op_bin bin_op_for op_bin
+
+   29 op_bin: id_or_digits
+   30       | rlb expr_binary rrb
+
+   31 op_rel: DIGITS
+   32       | BOOL
+   33       | expr_rel
+
+   34 cond_loop: if
+   35          | while
+
+   36 $@6: %empty
+
+   37 $@7: %empty
+
+   38 if: IF rlb op_rel rrb THEN clb $@6 stmt_list $@7 crb else
+
+   39 else: %empty
+
+   40 $@8: %empty
+
+   41 $@9: %empty
+
+   42 else: ELSE clb $@8 stmt_list $@9 crb
+
+   43 $@10: %empty
+
+   44 $@11: %empty
+
+   45 while: WHILE rlb op_rel rrb clb $@10 stmt_list $@11 crb
+
+   46 bin_op_for: ADD
+   47           | SUB
+   48           | MUL
+   49           | DIV
+
+   50 @12: %empty
+
+   51 fn_call: ID @12 rlb fn_call_args rrb
+
+   52 fn_call_args: %empty
+   53             | id_or_digits fn_call_args_prime
+   54             | bool_prod fn_call_args_prime
+
+   55 bool_prod: BOOL
+
+   56 fn_call_args_prime: %empty
+   57                   | comma fn_call_args
+
+   58 fn_def: %empty
+
+   59 @13: %empty
+
+   60 $@14: %empty
+
+   61 @15: %empty
+
+   62 $@16: %empty
+
+   63 fn_def: datatype ID @13 rlb $@14 func_args rrb @15 clb stmt_list RETURN ID crb $@16 fn_def
+
+   64 func_args: %empty
+   65          | datatype ID func_args_prime
+
+   66 func_args_prime: %empty
+   67                | comma func_args
+
+   68 datatype: INT
+   69         | VOID
+   70         | CHAR
+   71         | BOOL
+
+   72 relop: AND
+   73      | NEQ
+   74      | OR
+   75      | LTEQ
+   76      | GTEQ
+   77      | EQ
+   78      | LT
+   79      | GT
+
+   80 id_or_digits: ID
+   81             | DIGITS
+
+   82 comma: COMMA
+
+   83 semi_colon: SEMICOLON
+
+   84 rlb: RLB
+
+   85 rrb: RRB
+
+   86 clb: CLB
+
+   87 crb: CRB
+
+   88 slb: SLB
+
+   89 srb: SRB
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+error (256)
+INT (258) 68
+MAIN (259) 4
+MACRO (260)
+TYPEDEF (261)
+SEMICOLON (262) 83
+GLOBAL (263)
+COMMA (264) 82
+AMP (265)
+VOID (266) 69
+CHAR (267) 70
+BOOL_DATATYPE (268)
+DATATYPE (269)
+ID (270) 7 20 51 63 65 80
+BOOL (271) 32 55 71
+DIGITS (272) 9 31 81
+NEGATIVENUMBER (273)
+ADD (274) 46
+SUB (275) 47
+MUL (276) 48
+DIV (277) 49
+MOD (278)
+LT (279) 78
+GT (280) 79
+FOR (281)
+WHILE (282) 45
+DO (283)
+IF (284) 38
+ELSE (285) 42
+THEN (286) 38
+BREAK (287)
+CONTINUE (288)
+RETURN (289) 63
+GOTO (290)
+CLB (291) 86
+CRB (292) 87
+RLB (293) 84
+RRB (294) 85
+SLB (295) 88
+SRB (296) 89
+AND (297) 72
+OR (298) 74
+EQ (299) 20 77
+NEQ (300) 73
+LTEQ (301) 75
+GTEQ (302) 76
+
+
+Nonterminals, with rules where they appear
+
+$accept (48)
+    on left: 0
+prog (49)
+    on left: 4, on right: 0
+$@1 (50)
+    on left: 1, on right: 4
+$@2 (51)
+    on left: 2, on right: 4
+$@3 (52)
+    on left: 3, on right: 4
+var_decl (53)
+    on left: 5, on right: 14
+exps (54)
+    on left: 7, on right: 5 11
+@4 (55)
+    on left: 6, on right: 7
+exps_prime (56)
+    on left: 8 9, on right: 7
+comma_exps (57)
+    on left: 10 11, on right: 8 9
+stmt_list (58)
+    on left: 12 13, on right: 4 13 38 42 45 63
+stmt (59)
+    on left: 14 15 16 17, on right: 13
+assignment (60)
+    on left: 18 20, on right: 15
+$@5 (61)
+    on left: 19, on right: 20
+assignment_prime (62)
+    on left: 21 22, on right: 20
+expressions (63)
+    on left: 23 24, on right: 27
+expr_rel (64)
+    on left: 25, on right: 23 33
+op (65)
+    on left: 26 27, on right: 25
+expr_binary (66)
+    on left: 28, on right: 24 30
+op_bin (67)
+    on left: 29 30, on right: 28
+op_rel (68)
+    on left: 31 32 33, on right: 38 45
+cond_loop (69)
+    on left: 34 35, on right: 16
+if (70)
+    on left: 38, on right: 34
+$@6 (71)
+    on left: 36, on right: 38
+$@7 (72)
+    on left: 37, on right: 38
+else (73)
+    on left: 39 42, on right: 38
+$@8 (74)
+    on left: 40, on right: 42
+$@9 (75)
+    on left: 41, on right: 42
+while (76)
+    on left: 45, on right: 35
+$@10 (77)
+    on left: 43, on right: 45
+$@11 (78)
+    on left: 44, on right: 45
+bin_op_for (79)
+    on left: 46 47 48 49, on right: 28
+fn_call (80)
+    on left: 51, on right: 17 22
+@12 (81)
+    on left: 50, on right: 51
+fn_call_args (82)
+    on left: 52 53 54, on right: 51 57
+bool_prod (83)
+    on left: 55, on right: 54
+fn_call_args_prime (84)
+    on left: 56 57, on right: 53 54
+fn_def (85)
+    on left: 58 63, on right: 4 63
+@13 (86)
+    on left: 59, on right: 63
+$@14 (87)
+    on left: 60, on right: 63
+@15 (88)
+    on left: 61, on right: 63
+$@16 (89)
+    on left: 62, on right: 63
+func_args (90)
+    on left: 64 65, on right: 63 67
+func_args_prime (91)
+    on left: 66 67, on right: 65
+datatype (92)
+    on left: 68 69 70 71, on right: 5 63 65
+relop (93)
+    on left: 72 73 74 75 76 77 78 79, on right: 25
+id_or_digits (94)
+    on left: 80 81, on right: 21 26 29 53
+comma (95)
+    on left: 82, on right: 11 57 67
+semi_colon (96)
+    on left: 83, on right: 13
+rlb (97)
+    on left: 84, on right: 4 27 30 38 45 51 63
+rrb (98)
+    on left: 85, on right: 4 27 30 38 45 51 63
+clb (99)
+    on left: 86, on right: 4 38 42 45 63
+crb (100)
+    on left: 87, on right: 4 38 42 45 63
+slb (101)
+    on left: 88, on right: 9
+srb (102)
+    on left: 89, on right: 9
+
+
+State 0
+
+    0 $accept: . prog $end
+    1 $@1: . %empty
+    4 prog: . $@1 fn_def MAIN $@2 rlb rrb clb $@3 stmt_list crb
+
+    $default  reduce using rule 1 ($@1)
+
+    prog  go to state 1
+    $@1   go to state 2
+
+
+State 1
+
+    0 $accept: prog . $end
+
+    $end  shift, and go to state 3
+
+
+State 2
+
+    4 prog: $@1 . fn_def MAIN $@2 rlb rrb clb $@3 stmt_list crb
+   58 fn_def: . %empty  [MAIN]
+   63       | . datatype ID @13 rlb $@14 func_args rrb @15 clb stmt_list RETURN ID crb $@16 fn_def
+   68 datatype: . INT
+   69         | . VOID
+   70         | . CHAR
+   71         | . BOOL
+
+    INT   shift, and go to state 4
+    VOID  shift, and go to state 5
+    CHAR  shift, and go to state 6
+    BOOL  shift, and go to state 7
+
+    $default  reduce using rule 58 (fn_def)
+
+    fn_def    go to state 8
+    datatype  go to state 9
+
+
+State 3
+
+    0 $accept: prog $end .
+
+    $default  accept
+
+
+State 4
+
+   68 datatype: INT .
+
+    $default  reduce using rule 68 (datatype)
+
+
+State 5
+
+   69 datatype: VOID .
+
+    $default  reduce using rule 69 (datatype)
+
+
+State 6
+
+   70 datatype: CHAR .
+
+    $default  reduce using rule 70 (datatype)
+
+
+State 7
+
+   71 datatype: BOOL .
+
+    $default  reduce using rule 71 (datatype)
+
+
+State 8
+
+    4 prog: $@1 fn_def . MAIN $@2 rlb rrb clb $@3 stmt_list crb
+
+    MAIN  shift, and go to state 10
+
+
+State 9
+
+   63 fn_def: datatype . ID @13 rlb $@14 func_args rrb @15 clb stmt_list RETURN ID crb $@16 fn_def
+
+    ID  shift, and go to state 11
+
+
+State 10
+
+    2 $@2: . %empty
+    4 prog: $@1 fn_def MAIN . $@2 rlb rrb clb $@3 stmt_list crb
+
+    $default  reduce using rule 2 ($@2)
+
+    $@2  go to state 12
+
+
+State 11
+
+   59 @13: . %empty
+   63 fn_def: datatype ID . @13 rlb $@14 func_args rrb @15 clb stmt_list RETURN ID crb $@16 fn_def
+
+    $default  reduce using rule 59 (@13)
+
+    @13  go to state 13
+
+
+State 12
+
+    4 prog: $@1 fn_def MAIN $@2 . rlb rrb clb $@3 stmt_list crb
+   84 rlb: . RLB
+
+    RLB  shift, and go to state 14
+
+    rlb  go to state 15
+
+
+State 13
+
+   63 fn_def: datatype ID @13 . rlb $@14 func_args rrb @15 clb stmt_list RETURN ID crb $@16 fn_def
+   84 rlb: . RLB
+
+    RLB  shift, and go to state 14
+
+    rlb  go to state 16
+
+
+State 14
+
+   84 rlb: RLB .
+
+    $default  reduce using rule 84 (rlb)
+
+
+State 15
+
+    4 prog: $@1 fn_def MAIN $@2 rlb . rrb clb $@3 stmt_list crb
+   85 rrb: . RRB
+
+    RRB  shift, and go to state 17
+
+    rrb  go to state 18
+
+
+State 16
+
+   60 $@14: . %empty
+   63 fn_def: datatype ID @13 rlb . $@14 func_args rrb @15 clb stmt_list RETURN ID crb $@16 fn_def
+
+    $default  reduce using rule 60 ($@14)
+
+    $@14  go to state 19
+
+
+State 17
+
+   85 rrb: RRB .
+
+    $default  reduce using rule 85 (rrb)
+
+
+State 18
+
+    4 prog: $@1 fn_def MAIN $@2 rlb rrb . clb $@3 stmt_list crb
+   86 clb: . CLB
+
+    CLB  shift, and go to state 20
+
+    clb  go to state 21
+
+
+State 19
+
+   63 fn_def: datatype ID @13 rlb $@14 . func_args rrb @15 clb stmt_list RETURN ID crb $@16 fn_def
+   64 func_args: . %empty  [RRB]
+   65          | . datatype ID func_args_prime
+   68 datatype: . INT
+   69         | . VOID
+   70         | . CHAR
+   71         | . BOOL
+
+    INT   shift, and go to state 4
+    VOID  shift, and go to state 5
+    CHAR  shift, and go to state 6
+    BOOL  shift, and go to state 7
+
+    $default  reduce using rule 64 (func_args)
+
+    func_args  go to state 22
+    datatype   go to state 23
+
+
+State 20
+
+   86 clb: CLB .
+
+    $default  reduce using rule 86 (clb)
+
+
+State 21
+
+    3 $@3: . %empty
+    4 prog: $@1 fn_def MAIN $@2 rlb rrb clb . $@3 stmt_list crb
+
+    $default  reduce using rule 3 ($@3)
+
+    $@3  go to state 24
+
+
+State 22
+
+   63 fn_def: datatype ID @13 rlb $@14 func_args . rrb @15 clb stmt_list RETURN ID crb $@16 fn_def
+   85 rrb: . RRB
+
+    RRB  shift, and go to state 17
+
+    rrb  go to state 25
+
+
+State 23
+
+   65 func_args: datatype . ID func_args_prime
+
+    ID  shift, and go to state 26
+
+
+State 24
+
+    4 prog: $@1 fn_def MAIN $@2 rlb rrb clb $@3 . stmt_list crb
+    5 var_decl: . datatype exps
+   12 stmt_list: . %empty  [CRB]
+   13          | . stmt semi_colon stmt_list
+   14 stmt: . var_decl
+   15     | . assignment
+   16     | . cond_loop
+   17     | . fn_call
+   18 assignment: . %empty  [SEMICOLON]
+   20           | . ID $@5 EQ assignment_prime
+   34 cond_loop: . if
+   35          | . while
+   38 if: . IF rlb op_rel rrb THEN clb $@6 stmt_list $@7 crb else
+   45 while: . WHILE rlb op_rel rrb clb $@10 stmt_list $@11 crb
+   51 fn_call: . ID @12 rlb fn_call_args rrb
+   68 datatype: . INT
+   69         | . VOID
+   70         | . CHAR
+   71         | . BOOL
+
+    INT    shift, and go to state 4
+    VOID   shift, and go to state 5
+    CHAR   shift, and go to state 6
+    ID     shift, and go to state 27
+    BOOL   shift, and go to state 7
+    WHILE  shift, and go to state 28
+    IF     shift, and go to state 29
+
+    SEMICOLON  reduce using rule 18 (assignment)
+    $default   reduce using rule 12 (stmt_list)
+
+    var_decl    go to state 30
+    stmt_list   go to state 31
+    stmt        go to state 32
+    assignment  go to state 33
+    cond_loop   go to state 34
+    if          go to state 35
+    while       go to state 36
+    fn_call     go to state 37
+    datatype    go to state 38
+
+
+State 25
+
+   61 @15: . %empty
+   63 fn_def: datatype ID @13 rlb $@14 func_args rrb . @15 clb stmt_list RETURN ID crb $@16 fn_def
+
+    $default  reduce using rule 61 (@15)
+
+    @15  go to state 39
+
+
+State 26
+
+   65 func_args: datatype ID . func_args_prime
+   66 func_args_prime: . %empty  [RRB]
+   67                | . comma func_args
+   82 comma: . COMMA
+
+    COMMA  shift, and go to state 40
+
+    $default  reduce using rule 66 (func_args_prime)
+
+    func_args_prime  go to state 41
+    comma            go to state 42
+
+
+State 27
+
+   19 $@5: . %empty  [EQ]
+   20 assignment: ID . $@5 EQ assignment_prime
+   50 @12: . %empty  [RLB]
+   51 fn_call: ID . @12 rlb fn_call_args rrb
+
+    RLB       reduce using rule 50 (@12)
+    $default  reduce using rule 19 ($@5)
+
+    $@5  go to state 43
+    @12  go to state 44
+
+
+State 28
+
+   45 while: WHILE . rlb op_rel rrb clb $@10 stmt_list $@11 crb
+   84 rlb: . RLB
+
+    RLB  shift, and go to state 14
+
+    rlb  go to state 45
+
+
+State 29
+
+   38 if: IF . rlb op_rel rrb THEN clb $@6 stmt_list $@7 crb else
+   84 rlb: . RLB
+
+    RLB  shift, and go to state 14
+
+    rlb  go to state 46
+
+
+State 30
+
+   14 stmt: var_decl .
+
+    $default  reduce using rule 14 (stmt)
+
+
+State 31
+
+    4 prog: $@1 fn_def MAIN $@2 rlb rrb clb $@3 stmt_list . crb
+   87 crb: . CRB
+
+    CRB  shift, and go to state 47
+
+    crb  go to state 48
+
+
+State 32
+
+   13 stmt_list: stmt . semi_colon stmt_list
+   83 semi_colon: . SEMICOLON
+
+    SEMICOLON  shift, and go to state 49
+
+    semi_colon  go to state 50
+
+
+State 33
+
+   15 stmt: assignment .
+
+    $default  reduce using rule 15 (stmt)
+
+
+State 34
+
+   16 stmt: cond_loop .
+
+    $default  reduce using rule 16 (stmt)
+
+
+State 35
+
+   34 cond_loop: if .
+
+    $default  reduce using rule 34 (cond_loop)
+
+
+State 36
+
+   35 cond_loop: while .
+
+    $default  reduce using rule 35 (cond_loop)
+
+
+State 37
+
+   17 stmt: fn_call .
+
+    $default  reduce using rule 17 (stmt)
+
+
+State 38
+
+    5 var_decl: datatype . exps
+    7 exps: . ID @4 exps_prime
+
+    ID  shift, and go to state 51
+
+    exps  go to state 52
+
+
+State 39
+
+   63 fn_def: datatype ID @13 rlb $@14 func_args rrb @15 . clb stmt_list RETURN ID crb $@16 fn_def
+   86 clb: . CLB
+
+    CLB  shift, and go to state 20
+
+    clb  go to state 53
+
+
+State 40
+
+   82 comma: COMMA .
+
+    $default  reduce using rule 82 (comma)
+
+
+State 41
+
+   65 func_args: datatype ID func_args_prime .
+
+    $default  reduce using rule 65 (func_args)
+
+
+State 42
+
+   64 func_args: . %empty  [RRB]
+   65          | . datatype ID func_args_prime
+   67 func_args_prime: comma . func_args
+   68 datatype: . INT
+   69         | . VOID
+   70         | . CHAR
+   71         | . BOOL
+
+    INT   shift, and go to state 4
+    VOID  shift, and go to state 5
+    CHAR  shift, and go to state 6
+    BOOL  shift, and go to state 7
+
+    $default  reduce using rule 64 (func_args)
+
+    func_args  go to state 54
+    datatype   go to state 23
+
+
+State 43
+
+   20 assignment: ID $@5 . EQ assignment_prime
+
+    EQ  shift, and go to state 55
+
+
+State 44
+
+   51 fn_call: ID @12 . rlb fn_call_args rrb
+   84 rlb: . RLB
+
+    RLB  shift, and go to state 14
+
+    rlb  go to state 56
+
+
+State 45
+
+   25 expr_rel: . op relop op
+   26 op: . id_or_digits
+   27   | . rlb expressions rrb
+   31 op_rel: . DIGITS
+   32       | . BOOL
+   33       | . expr_rel
+   45 while: WHILE rlb . op_rel rrb clb $@10 stmt_list $@11 crb
+   80 id_or_digits: . ID
+   81             | . DIGITS
+   84 rlb: . RLB
+
+    ID      shift, and go to state 57
+    BOOL    shift, and go to state 58
+    DIGITS  shift, and go to state 59
+    RLB     shift, and go to state 14
+
+    expr_rel      go to state 60
+    op            go to state 61
+    op_rel        go to state 62
+    id_or_digits  go to state 63
+    rlb           go to state 64
+
+
+State 46
+
+   25 expr_rel: . op relop op
+   26 op: . id_or_digits
+   27   | . rlb expressions rrb
+   31 op_rel: . DIGITS
+   32       | . BOOL
+   33       | . expr_rel
+   38 if: IF rlb . op_rel rrb THEN clb $@6 stmt_list $@7 crb else
+   80 id_or_digits: . ID
+   81             | . DIGITS
+   84 rlb: . RLB
+
+    ID      shift, and go to state 57
+    BOOL    shift, and go to state 58
+    DIGITS  shift, and go to state 59
+    RLB     shift, and go to state 14
+
+    expr_rel      go to state 60
+    op            go to state 61
+    op_rel        go to state 65
+    id_or_digits  go to state 63
+    rlb           go to state 64
+
+
+State 47
+
+   87 crb: CRB .
+
+    $default  reduce using rule 87 (crb)
+
+
+State 48
+
+    4 prog: $@1 fn_def MAIN $@2 rlb rrb clb $@3 stmt_list crb .
+
+    $default  reduce using rule 4 (prog)
+
+
+State 49
+
+   83 semi_colon: SEMICOLON .
+
+    $default  reduce using rule 83 (semi_colon)
+
+
+State 50
+
+    5 var_decl: . datatype exps
+   12 stmt_list: . %empty  [RETURN, CRB]
+   13          | . stmt semi_colon stmt_list
+   13          | stmt semi_colon . stmt_list
+   14 stmt: . var_decl
+   15     | . assignment
+   16     | . cond_loop
+   17     | . fn_call
+   18 assignment: . %empty  [SEMICOLON]
+   20           | . ID $@5 EQ assignment_prime
+   34 cond_loop: . if
+   35          | . while
+   38 if: . IF rlb op_rel rrb THEN clb $@6 stmt_list $@7 crb else
+   45 while: . WHILE rlb op_rel rrb clb $@10 stmt_list $@11 crb
+   51 fn_call: . ID @12 rlb fn_call_args rrb
+   68 datatype: . INT
+   69         | . VOID
+   70         | . CHAR
+   71         | . BOOL
+
+    INT    shift, and go to state 4
+    VOID   shift, and go to state 5
+    CHAR   shift, and go to state 6
+    ID     shift, and go to state 27
+    BOOL   shift, and go to state 7
+    WHILE  shift, and go to state 28
+    IF     shift, and go to state 29
+
+    SEMICOLON  reduce using rule 18 (assignment)
+    $default   reduce using rule 12 (stmt_list)
+
+    var_decl    go to state 30
+    stmt_list   go to state 66
+    stmt        go to state 32
+    assignment  go to state 33
+    cond_loop   go to state 34
+    if          go to state 35
+    while       go to state 36
+    fn_call     go to state 37
+    datatype    go to state 38
+
+
+State 51
+
+    6 @4: . %empty
+    7 exps: ID . @4 exps_prime
+
+    $default  reduce using rule 6 (@4)
+
+    @4  go to state 67
+
+
+State 52
+
+    5 var_decl: datatype exps .
+
+    $default  reduce using rule 5 (var_decl)
+
+
+State 53
+
+    5 var_decl: . datatype exps
+   12 stmt_list: . %empty  [RETURN]
+   13          | . stmt semi_colon stmt_list
+   14 stmt: . var_decl
+   15     | . assignment
+   16     | . cond_loop
+   17     | . fn_call
+   18 assignment: . %empty  [SEMICOLON]
+   20           | . ID $@5 EQ assignment_prime
+   34 cond_loop: . if
+   35          | . while
+   38 if: . IF rlb op_rel rrb THEN clb $@6 stmt_list $@7 crb else
+   45 while: . WHILE rlb op_rel rrb clb $@10 stmt_list $@11 crb
+   51 fn_call: . ID @12 rlb fn_call_args rrb
+   63 fn_def: datatype ID @13 rlb $@14 func_args rrb @15 clb . stmt_list RETURN ID crb $@16 fn_def
+   68 datatype: . INT
+   69         | . VOID
+   70         | . CHAR
+   71         | . BOOL
+
+    INT    shift, and go to state 4
+    VOID   shift, and go to state 5
+    CHAR   shift, and go to state 6
+    ID     shift, and go to state 27
+    BOOL   shift, and go to state 7
+    WHILE  shift, and go to state 28
+    IF     shift, and go to state 29
+
+    SEMICOLON  reduce using rule 18 (assignment)
+    $default   reduce using rule 12 (stmt_list)
+
+    var_decl    go to state 30
+    stmt_list   go to state 68
+    stmt        go to state 32
+    assignment  go to state 33
+    cond_loop   go to state 34
+    if          go to state 35
+    while       go to state 36
+    fn_call     go to state 37
+    datatype    go to state 38
+
+
+State 54
+
+   67 func_args_prime: comma func_args .
+
+    $default  reduce using rule 67 (func_args_prime)
+
+
+State 55
+
+   20 assignment: ID $@5 EQ . assignment_prime
+   21 assignment_prime: . id_or_digits
+   22                 | . fn_call
+   51 fn_call: . ID @12 rlb fn_call_args rrb
+   80 id_or_digits: . ID
+   81             | . DIGITS
+
+    ID      shift, and go to state 69
+    DIGITS  shift, and go to state 70
+
+    assignment_prime  go to state 71
+    fn_call           go to state 72
+    id_or_digits      go to state 73
+
+
+State 56
+
+   51 fn_call: ID @12 rlb . fn_call_args rrb
+   52 fn_call_args: . %empty  [RRB]
+   53             | . id_or_digits fn_call_args_prime
+   54             | . bool_prod fn_call_args_prime
+   55 bool_prod: . BOOL
+   80 id_or_digits: . ID
+   81             | . DIGITS
+
+    ID      shift, and go to state 57
+    BOOL    shift, and go to state 74
+    DIGITS  shift, and go to state 70
+
+    $default  reduce using rule 52 (fn_call_args)
+
+    fn_call_args  go to state 75
+    bool_prod     go to state 76
+    id_or_digits  go to state 77
+
+
+State 57
+
+   80 id_or_digits: ID .
+
+    $default  reduce using rule 80 (id_or_digits)
+
+
+State 58
+
+   32 op_rel: BOOL .
+
+    $default  reduce using rule 32 (op_rel)
+
+
+State 59
+
+   31 op_rel: DIGITS .  [RRB]
+   81 id_or_digits: DIGITS .  [LT, GT, AND, OR, EQ, NEQ, LTEQ, GTEQ]
+
+    RRB       reduce using rule 31 (op_rel)
+    $default  reduce using rule 81 (id_or_digits)
+
+
+State 60
+
+   33 op_rel: expr_rel .
+
+    $default  reduce using rule 33 (op_rel)
+
+
+State 61
+
+   25 expr_rel: op . relop op
+   72 relop: . AND
+   73      | . NEQ
+   74      | . OR
+   75      | . LTEQ
+   76      | . GTEQ
+   77      | . EQ
+   78      | . LT
+   79      | . GT
+
+    LT    shift, and go to state 78
+    GT    shift, and go to state 79
+    AND   shift, and go to state 80
+    OR    shift, and go to state 81
+    EQ    shift, and go to state 82
+    NEQ   shift, and go to state 83
+    LTEQ  shift, and go to state 84
+    GTEQ  shift, and go to state 85
+
+    relop  go to state 86
+
+
+State 62
+
+   45 while: WHILE rlb op_rel . rrb clb $@10 stmt_list $@11 crb
+   85 rrb: . RRB
+
+    RRB  shift, and go to state 17
+
+    rrb  go to state 87
+
+
+State 63
+
+   26 op: id_or_digits .
+
+    $default  reduce using rule 26 (op)
+
+
+State 64
+
+   23 expressions: . expr_rel
+   24            | . expr_binary
+   25 expr_rel: . op relop op
+   26 op: . id_or_digits
+   27   | . rlb expressions rrb
+   27   | rlb . expressions rrb
+   28 expr_binary: . op_bin bin_op_for op_bin
+   29 op_bin: . id_or_digits
+   30       | . rlb expr_binary rrb
+   80 id_or_digits: . ID
+   81             | . DIGITS
+   84 rlb: . RLB
+
+    ID      shift, and go to state 57
+    DIGITS  shift, and go to state 70
+    RLB     shift, and go to state 14
+
+    expressions   go to state 88
+    expr_rel      go to state 89
+    op            go to state 61
+    expr_binary   go to state 90
+    op_bin        go to state 91
+    id_or_digits  go to state 92
+    rlb           go to state 93
+
+
+State 65
+
+   38 if: IF rlb op_rel . rrb THEN clb $@6 stmt_list $@7 crb else
+   85 rrb: . RRB
+
+    RRB  shift, and go to state 17
+
+    rrb  go to state 94
+
+
+State 66
+
+   13 stmt_list: stmt semi_colon stmt_list .
+
+    $default  reduce using rule 13 (stmt_list)
+
+
+State 67
+
+    7 exps: ID @4 . exps_prime
+    8 exps_prime: . comma_exps
+    9           | . slb DIGITS srb comma_exps
+   10 comma_exps: . %empty  [SEMICOLON]
+   11           | . comma exps
+   82 comma: . COMMA
+   88 slb: . SLB
+
+    COMMA  shift, and go to state 40
+    SLB    shift, and go to state 95
+
+    $default  reduce using rule 10 (comma_exps)
+
+    exps_prime  go to state 96
+    comma_exps  go to state 97
+    comma       go to state 98
+    slb         go to state 99
+
+
+State 68
+
+   63 fn_def: datatype ID @13 rlb $@14 func_args rrb @15 clb stmt_list . RETURN ID crb $@16 fn_def
+
+    RETURN  shift, and go to state 100
+
+
+State 69
+
+   50 @12: . %empty  [RLB]
+   51 fn_call: ID . @12 rlb fn_call_args rrb
+   80 id_or_digits: ID .  [SEMICOLON]
+
+    SEMICOLON  reduce using rule 80 (id_or_digits)
+    $default   reduce using rule 50 (@12)
+
+    @12  go to state 44
+
+
+State 70
+
+   81 id_or_digits: DIGITS .
+
+    $default  reduce using rule 81 (id_or_digits)
+
+
+State 71
+
+   20 assignment: ID $@5 EQ assignment_prime .
+
+    $default  reduce using rule 20 (assignment)
+
+
+State 72
+
+   22 assignment_prime: fn_call .
+
+    $default  reduce using rule 22 (assignment_prime)
+
+
+State 73
+
+   21 assignment_prime: id_or_digits .
+
+    $default  reduce using rule 21 (assignment_prime)
+
+
+State 74
+
+   55 bool_prod: BOOL .
+
+    $default  reduce using rule 55 (bool_prod)
+
+
+State 75
+
+   51 fn_call: ID @12 rlb fn_call_args . rrb
+   85 rrb: . RRB
+
+    RRB  shift, and go to state 17
+
+    rrb  go to state 101
+
+
+State 76
+
+   54 fn_call_args: bool_prod . fn_call_args_prime
+   56 fn_call_args_prime: . %empty  [RRB]
+   57                   | . comma fn_call_args
+   82 comma: . COMMA
+
+    COMMA  shift, and go to state 40
+
+    $default  reduce using rule 56 (fn_call_args_prime)
+
+    fn_call_args_prime  go to state 102
+    comma               go to state 103
+
+
+State 77
+
+   53 fn_call_args: id_or_digits . fn_call_args_prime
+   56 fn_call_args_prime: . %empty  [RRB]
+   57                   | . comma fn_call_args
+   82 comma: . COMMA
+
+    COMMA  shift, and go to state 40
+
+    $default  reduce using rule 56 (fn_call_args_prime)
+
+    fn_call_args_prime  go to state 104
+    comma               go to state 103
+
+
+State 78
+
+   78 relop: LT .
+
+    $default  reduce using rule 78 (relop)
+
+
+State 79
+
+   79 relop: GT .
+
+    $default  reduce using rule 79 (relop)
+
+
+State 80
+
+   72 relop: AND .
+
+    $default  reduce using rule 72 (relop)
+
+
+State 81
+
+   74 relop: OR .
+
+    $default  reduce using rule 74 (relop)
+
+
+State 82
+
+   77 relop: EQ .
+
+    $default  reduce using rule 77 (relop)
+
+
+State 83
+
+   73 relop: NEQ .
+
+    $default  reduce using rule 73 (relop)
+
+
+State 84
+
+   75 relop: LTEQ .
+
+    $default  reduce using rule 75 (relop)
+
+
+State 85
+
+   76 relop: GTEQ .
+
+    $default  reduce using rule 76 (relop)
+
+
+State 86
+
+   25 expr_rel: op relop . op
+   26 op: . id_or_digits
+   27   | . rlb expressions rrb
+   80 id_or_digits: . ID
+   81             | . DIGITS
+   84 rlb: . RLB
+
+    ID      shift, and go to state 57
+    DIGITS  shift, and go to state 70
+    RLB     shift, and go to state 14
+
+    op            go to state 105
+    id_or_digits  go to state 63
+    rlb           go to state 64
+
+
+State 87
+
+   45 while: WHILE rlb op_rel rrb . clb $@10 stmt_list $@11 crb
+   86 clb: . CLB
+
+    CLB  shift, and go to state 20
+
+    clb  go to state 106
+
+
+State 88
+
+   27 op: rlb expressions . rrb
+   85 rrb: . RRB
+
+    RRB  shift, and go to state 17
+
+    rrb  go to state 107
+
+
+State 89
+
+   23 expressions: expr_rel .
+
+    $default  reduce using rule 23 (expressions)
+
+
+State 90
+
+   24 expressions: expr_binary .
+
+    $default  reduce using rule 24 (expressions)
+
+
+State 91
+
+   28 expr_binary: op_bin . bin_op_for op_bin
+   46 bin_op_for: . ADD
+   47           | . SUB
+   48           | . MUL
+   49           | . DIV
+
+    ADD  shift, and go to state 108
+    SUB  shift, and go to state 109
+    MUL  shift, and go to state 110
+    DIV  shift, and go to state 111
+
+    bin_op_for  go to state 112
+
+
+State 92
+
+   26 op: id_or_digits .  [LT, GT, AND, OR, EQ, NEQ, LTEQ, GTEQ]
+   29 op_bin: id_or_digits .  [ADD, SUB, MUL, DIV]
+
+    ADD       reduce using rule 29 (op_bin)
+    SUB       reduce using rule 29 (op_bin)
+    MUL       reduce using rule 29 (op_bin)
+    DIV       reduce using rule 29 (op_bin)
+    $default  reduce using rule 26 (op)
+
+
+State 93
+
+   23 expressions: . expr_rel
+   24            | . expr_binary
+   25 expr_rel: . op relop op
+   26 op: . id_or_digits
+   27   | . rlb expressions rrb
+   27   | rlb . expressions rrb
+   28 expr_binary: . op_bin bin_op_for op_bin
+   29 op_bin: . id_or_digits
+   30       | . rlb expr_binary rrb
+   30       | rlb . expr_binary rrb
+   80 id_or_digits: . ID
+   81             | . DIGITS
+   84 rlb: . RLB
+
+    ID      shift, and go to state 57
+    DIGITS  shift, and go to state 70
+    RLB     shift, and go to state 14
+
+    expressions   go to state 88
+    expr_rel      go to state 89
+    op            go to state 61
+    expr_binary   go to state 113
+    op_bin        go to state 91
+    id_or_digits  go to state 92
+    rlb           go to state 93
+
+
+State 94
+
+   38 if: IF rlb op_rel rrb . THEN clb $@6 stmt_list $@7 crb else
+
+    THEN  shift, and go to state 114
+
+
+State 95
+
+   88 slb: SLB .
+
+    $default  reduce using rule 88 (slb)
+
+
+State 96
+
+    7 exps: ID @4 exps_prime .
+
+    $default  reduce using rule 7 (exps)
+
+
+State 97
+
+    8 exps_prime: comma_exps .
+
+    $default  reduce using rule 8 (exps_prime)
+
+
+State 98
+
+    7 exps: . ID @4 exps_prime
+   11 comma_exps: comma . exps
+
+    ID  shift, and go to state 51
+
+    exps  go to state 115
+
+
+State 99
+
+    9 exps_prime: slb . DIGITS srb comma_exps
+
+    DIGITS  shift, and go to state 116
+
+
+State 100
+
+   63 fn_def: datatype ID @13 rlb $@14 func_args rrb @15 clb stmt_list RETURN . ID crb $@16 fn_def
+
+    ID  shift, and go to state 117
+
+
+State 101
+
+   51 fn_call: ID @12 rlb fn_call_args rrb .
+
+    $default  reduce using rule 51 (fn_call)
+
+
+State 102
+
+   54 fn_call_args: bool_prod fn_call_args_prime .
+
+    $default  reduce using rule 54 (fn_call_args)
+
+
+State 103
+
+   52 fn_call_args: . %empty  [RRB]
+   53             | . id_or_digits fn_call_args_prime
+   54             | . bool_prod fn_call_args_prime
+   55 bool_prod: . BOOL
+   57 fn_call_args_prime: comma . fn_call_args
+   80 id_or_digits: . ID
+   81             | . DIGITS
+
+    ID      shift, and go to state 57
+    BOOL    shift, and go to state 74
+    DIGITS  shift, and go to state 70
+
+    $default  reduce using rule 52 (fn_call_args)
+
+    fn_call_args  go to state 118
+    bool_prod     go to state 76
+    id_or_digits  go to state 77
+
+
+State 104
+
+   53 fn_call_args: id_or_digits fn_call_args_prime .
+
+    $default  reduce using rule 53 (fn_call_args)
+
+
+State 105
+
+   25 expr_rel: op relop op .
+
+    $default  reduce using rule 25 (expr_rel)
+
+
+State 106
+
+   43 $@10: . %empty
+   45 while: WHILE rlb op_rel rrb clb . $@10 stmt_list $@11 crb
+
+    $default  reduce using rule 43 ($@10)
+
+    $@10  go to state 119
+
+
+State 107
+
+   27 op: rlb expressions rrb .
+
+    $default  reduce using rule 27 (op)
+
+
+State 108
+
+   46 bin_op_for: ADD .
+
+    $default  reduce using rule 46 (bin_op_for)
+
+
+State 109
+
+   47 bin_op_for: SUB .
+
+    $default  reduce using rule 47 (bin_op_for)
+
+
+State 110
+
+   48 bin_op_for: MUL .
+
+    $default  reduce using rule 48 (bin_op_for)
+
+
+State 111
+
+   49 bin_op_for: DIV .
+
+    $default  reduce using rule 49 (bin_op_for)
+
+
+State 112
+
+   28 expr_binary: op_bin bin_op_for . op_bin
+   29 op_bin: . id_or_digits
+   30       | . rlb expr_binary rrb
+   80 id_or_digits: . ID
+   81             | . DIGITS
+   84 rlb: . RLB
+
+    ID      shift, and go to state 57
+    DIGITS  shift, and go to state 70
+    RLB     shift, and go to state 14
+
+    op_bin        go to state 120
+    id_or_digits  go to state 121
+    rlb           go to state 122
+
+
+State 113
+
+   24 expressions: expr_binary .  [RRB]
+   30 op_bin: rlb expr_binary . rrb
+   85 rrb: . RRB
+
+    RRB  shift, and go to state 17
+
+    RRB  [reduce using rule 24 (expressions)]
+
+    rrb  go to state 123
+
+
+State 114
+
+   38 if: IF rlb op_rel rrb THEN . clb $@6 stmt_list $@7 crb else
+   86 clb: . CLB
+
+    CLB  shift, and go to state 20
+
+    clb  go to state 124
+
+
+State 115
+
+   11 comma_exps: comma exps .
+
+    $default  reduce using rule 11 (comma_exps)
+
+
+State 116
+
+    9 exps_prime: slb DIGITS . srb comma_exps
+   89 srb: . SRB
+
+    SRB  shift, and go to state 125
+
+    srb  go to state 126
+
+
+State 117
+
+   63 fn_def: datatype ID @13 rlb $@14 func_args rrb @15 clb stmt_list RETURN ID . crb $@16 fn_def
+   87 crb: . CRB
+
+    CRB  shift, and go to state 47
+
+    crb  go to state 127
+
+
+State 118
+
+   57 fn_call_args_prime: comma fn_call_args .
+
+    $default  reduce using rule 57 (fn_call_args_prime)
+
+
+State 119
+
+    5 var_decl: . datatype exps
+   12 stmt_list: . %empty  [CRB]
+   13          | . stmt semi_colon stmt_list
+   14 stmt: . var_decl
+   15     | . assignment
+   16     | . cond_loop
+   17     | . fn_call
+   18 assignment: . %empty  [SEMICOLON]
+   20           | . ID $@5 EQ assignment_prime
+   34 cond_loop: . if
+   35          | . while
+   38 if: . IF rlb op_rel rrb THEN clb $@6 stmt_list $@7 crb else
+   45 while: . WHILE rlb op_rel rrb clb $@10 stmt_list $@11 crb
+   45      | WHILE rlb op_rel rrb clb $@10 . stmt_list $@11 crb
+   51 fn_call: . ID @12 rlb fn_call_args rrb
+   68 datatype: . INT
+   69         | . VOID
+   70         | . CHAR
+   71         | . BOOL
+
+    INT    shift, and go to state 4
+    VOID   shift, and go to state 5
+    CHAR   shift, and go to state 6
+    ID     shift, and go to state 27
+    BOOL   shift, and go to state 7
+    WHILE  shift, and go to state 28
+    IF     shift, and go to state 29
+
+    SEMICOLON  reduce using rule 18 (assignment)
+    $default   reduce using rule 12 (stmt_list)
+
+    var_decl    go to state 30
+    stmt_list   go to state 128
+    stmt        go to state 32
+    assignment  go to state 33
+    cond_loop   go to state 34
+    if          go to state 35
+    while       go to state 36
+    fn_call     go to state 37
+    datatype    go to state 38
+
+
+State 120
+
+   28 expr_binary: op_bin bin_op_for op_bin .
+
+    $default  reduce using rule 28 (expr_binary)
+
+
+State 121
+
+   29 op_bin: id_or_digits .
+
+    $default  reduce using rule 29 (op_bin)
+
+
+State 122
+
+   28 expr_binary: . op_bin bin_op_for op_bin
+   29 op_bin: . id_or_digits
+   30       | . rlb expr_binary rrb
+   30       | rlb . expr_binary rrb
+   80 id_or_digits: . ID
+   81             | . DIGITS
+   84 rlb: . RLB
+
+    ID      shift, and go to state 57
+    DIGITS  shift, and go to state 70
+    RLB     shift, and go to state 14
+
+    expr_binary   go to state 129
+    op_bin        go to state 91
+    id_or_digits  go to state 121
+    rlb           go to state 122
+
+
+State 123
+
+   30 op_bin: rlb expr_binary rrb .
+
+    $default  reduce using rule 30 (op_bin)
+
+
+State 124
+
+   36 $@6: . %empty
+   38 if: IF rlb op_rel rrb THEN clb . $@6 stmt_list $@7 crb else
+
+    $default  reduce using rule 36 ($@6)
+
+    $@6  go to state 130
+
+
+State 125
+
+   89 srb: SRB .
+
+    $default  reduce using rule 89 (srb)
+
+
+State 126
+
+    9 exps_prime: slb DIGITS srb . comma_exps
+   10 comma_exps: . %empty  [SEMICOLON]
+   11           | . comma exps
+   82 comma: . COMMA
+
+    COMMA  shift, and go to state 40
+
+    $default  reduce using rule 10 (comma_exps)
+
+    comma_exps  go to state 131
+    comma       go to state 98
+
+
+State 127
+
+   62 $@16: . %empty
+   63 fn_def: datatype ID @13 rlb $@14 func_args rrb @15 clb stmt_list RETURN ID crb . $@16 fn_def
+
+    $default  reduce using rule 62 ($@16)
+
+    $@16  go to state 132
+
+
+State 128
+
+   44 $@11: . %empty
+   45 while: WHILE rlb op_rel rrb clb $@10 stmt_list . $@11 crb
+
+    $default  reduce using rule 44 ($@11)
+
+    $@11  go to state 133
+
+
+State 129
+
+   30 op_bin: rlb expr_binary . rrb
+   85 rrb: . RRB
+
+    RRB  shift, and go to state 17
+
+    rrb  go to state 123
+
+
+State 130
+
+    5 var_decl: . datatype exps
+   12 stmt_list: . %empty  [CRB]
+   13          | . stmt semi_colon stmt_list
+   14 stmt: . var_decl
+   15     | . assignment
+   16     | . cond_loop
+   17     | . fn_call
+   18 assignment: . %empty  [SEMICOLON]
+   20           | . ID $@5 EQ assignment_prime
+   34 cond_loop: . if
+   35          | . while
+   38 if: . IF rlb op_rel rrb THEN clb $@6 stmt_list $@7 crb else
+   38   | IF rlb op_rel rrb THEN clb $@6 . stmt_list $@7 crb else
+   45 while: . WHILE rlb op_rel rrb clb $@10 stmt_list $@11 crb
+   51 fn_call: . ID @12 rlb fn_call_args rrb
+   68 datatype: . INT
+   69         | . VOID
+   70         | . CHAR
+   71         | . BOOL
+
+    INT    shift, and go to state 4
+    VOID   shift, and go to state 5
+    CHAR   shift, and go to state 6
+    ID     shift, and go to state 27
+    BOOL   shift, and go to state 7
+    WHILE  shift, and go to state 28
+    IF     shift, and go to state 29
+
+    SEMICOLON  reduce using rule 18 (assignment)
+    $default   reduce using rule 12 (stmt_list)
+
+    var_decl    go to state 30
+    stmt_list   go to state 134
+    stmt        go to state 32
+    assignment  go to state 33
+    cond_loop   go to state 34
+    if          go to state 35
+    while       go to state 36
+    fn_call     go to state 37
+    datatype    go to state 38
+
+
+State 131
+
+    9 exps_prime: slb DIGITS srb comma_exps .
+
+    $default  reduce using rule 9 (exps_prime)
+
+
+State 132
+
+   58 fn_def: . %empty  [MAIN]
+   63       | . datatype ID @13 rlb $@14 func_args rrb @15 clb stmt_list RETURN ID crb $@16 fn_def
+   63       | datatype ID @13 rlb $@14 func_args rrb @15 clb stmt_list RETURN ID crb $@16 . fn_def
+   68 datatype: . INT
+   69         | . VOID
+   70         | . CHAR
+   71         | . BOOL
+
+    INT   shift, and go to state 4
+    VOID  shift, and go to state 5
+    CHAR  shift, and go to state 6
+    BOOL  shift, and go to state 7
+
+    $default  reduce using rule 58 (fn_def)
+
+    fn_def    go to state 135
+    datatype  go to state 9
+
+
+State 133
+
+   45 while: WHILE rlb op_rel rrb clb $@10 stmt_list $@11 . crb
+   87 crb: . CRB
+
+    CRB  shift, and go to state 47
+
+    crb  go to state 136
+
+
+State 134
+
+   37 $@7: . %empty
+   38 if: IF rlb op_rel rrb THEN clb $@6 stmt_list . $@7 crb else
+
+    $default  reduce using rule 37 ($@7)
+
+    $@7  go to state 137
+
+
+State 135
+
+   63 fn_def: datatype ID @13 rlb $@14 func_args rrb @15 clb stmt_list RETURN ID crb $@16 fn_def .
+
+    $default  reduce using rule 63 (fn_def)
+
+
+State 136
+
+   45 while: WHILE rlb op_rel rrb clb $@10 stmt_list $@11 crb .
+
+    $default  reduce using rule 45 (while)
+
+
+State 137
+
+   38 if: IF rlb op_rel rrb THEN clb $@6 stmt_list $@7 . crb else
+   87 crb: . CRB
+
+    CRB  shift, and go to state 47
+
+    crb  go to state 138
+
+
+State 138
+
+   38 if: IF rlb op_rel rrb THEN clb $@6 stmt_list $@7 crb . else
+   39 else: . %empty  [SEMICOLON]
+   42     | . ELSE clb $@8 stmt_list $@9 crb
+
+    ELSE  shift, and go to state 139
+
+    $default  reduce using rule 39 (else)
+
+    else  go to state 140
+
+
+State 139
+
+   42 else: ELSE . clb $@8 stmt_list $@9 crb
+   86 clb: . CLB
+
+    CLB  shift, and go to state 20
+
+    clb  go to state 141
+
+
+State 140
+
+   38 if: IF rlb op_rel rrb THEN clb $@6 stmt_list $@7 crb else .
+
+    $default  reduce using rule 38 (if)
+
+
+State 141
+
+   40 $@8: . %empty
+   42 else: ELSE clb . $@8 stmt_list $@9 crb
+
+    $default  reduce using rule 40 ($@8)
+
+    $@8  go to state 142
+
+
+State 142
+
+    5 var_decl: . datatype exps
+   12 stmt_list: . %empty  [CRB]
+   13          | . stmt semi_colon stmt_list
+   14 stmt: . var_decl
+   15     | . assignment
+   16     | . cond_loop
+   17     | . fn_call
+   18 assignment: . %empty  [SEMICOLON]
+   20           | . ID $@5 EQ assignment_prime
+   34 cond_loop: . if
+   35          | . while
+   38 if: . IF rlb op_rel rrb THEN clb $@6 stmt_list $@7 crb else
+   42 else: ELSE clb $@8 . stmt_list $@9 crb
+   45 while: . WHILE rlb op_rel rrb clb $@10 stmt_list $@11 crb
+   51 fn_call: . ID @12 rlb fn_call_args rrb
+   68 datatype: . INT
+   69         | . VOID
+   70         | . CHAR
+   71         | . BOOL
+
+    INT    shift, and go to state 4
+    VOID   shift, and go to state 5
+    CHAR   shift, and go to state 6
+    ID     shift, and go to state 27
+    BOOL   shift, and go to state 7
+    WHILE  shift, and go to state 28
+    IF     shift, and go to state 29
+
+    SEMICOLON  reduce using rule 18 (assignment)
+    $default   reduce using rule 12 (stmt_list)
+
+    var_decl    go to state 30
+    stmt_list   go to state 143
+    stmt        go to state 32
+    assignment  go to state 33
+    cond_loop   go to state 34
+    if          go to state 35
+    while       go to state 36
+    fn_call     go to state 37
+    datatype    go to state 38
+
+
+State 143
+
+   41 $@9: . %empty
+   42 else: ELSE clb $@8 stmt_list . $@9 crb
+
+    $default  reduce using rule 41 ($@9)
+
+    $@9  go to state 144
+
+
+State 144
+
+   42 else: ELSE clb $@8 stmt_list $@9 . crb
+   87 crb: . CRB
+
+    CRB  shift, and go to state 47
+
+    crb  go to state 145
+
+
+State 145
+
+   42 else: ELSE clb $@8 stmt_list $@9 crb .
+
+    $default  reduce using rule 42 (else)

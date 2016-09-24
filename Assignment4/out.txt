@@ -1,0 +1,122 @@
+ MAIN Hi
+mainmain
+I am in main 
+ ROUNDLP  ROUNDRP  
+ CURLYLP  
+ INT  <ID: a >  COMMA  <ID: b >  SEMICOLON 
+Here in append_list b
+b Value
+b CommaValue
+
+Here in append_list a
+a Value
+ 
+ CHAR  <ID: c >  COMMA  <ID: d >  SEMICOLON 
+Here in append_list d
+d Value
+d CommaValue
+
+Here in append_list c
+c Value
+ 
+ ASSIGN  <ID: c >  ASG  <ID: a >  ADD +---Element not declared
+ <ID: b > Type1:  Type2: int
+ SEMICOLON  
+ IF  ROUNDLP  <ID: a >  LT  <ID: b > Type1: int Type2: int
+ ROUNDRP  THEN  
+ CURLYLP  
+ INT  <ID: a >  COMMA  <ID: e >  COMMA  <ID: f >  SEMICOLON 
+Here in append_list f
+f Value
+f CommaValue
+
+Here in append_list e
+e Value
+e CommaValue
+
+Here in append_list a
+a Value
+ 
+ CHAR  <ID: a >  SEMICOLON 
+Here in append_list a
+a Value
+ 
+ CURLYRP ----------------
+
+Name	Type	Parameters	Variables
+Entry Number: 1
+main	void
+Parameters:
+Variables:
+a	simple	variable	2	int
+b	simple	variable	2	int
+c	simple	variable	2	char
+d	simple	variable	2	char
+a	simple	variable	3	int
+e	simple	variable	3	int
+f	simple	variable	3	int
+a	simple	variable	3	char
+ 
+ ELSE  
+ CURLYLP  
+ INT  <ID: a >  SEMICOLON 
+Here in append_list a
+a Value
+ 
+ CURLYRP ----------------
+
+Name	Type	Parameters	Variables
+Entry Number: 1
+main	void
+Parameters:
+Variables:
+a	simple	variable	2	int
+b	simple	variable	2	int
+c	simple	variable	2	char
+d	simple	variable	2	char
+a	simple	variable	3	int
+Variable a
+Variable b
+Variable c
+Variable d
+Variable a
+ SEMICOLON  
+ WHILE  ROUNDLP  ROUNDLP  <ID: a >  ADD  <ID: b > Type1: int Type2: int
+ ROUNDRP  GT  ROUNDLP  <ID: c >  ADD  <ID: d > Type1: char Type2: char
+ ROUNDRP Type1: int Type2: char
+int charRelative expression types mismatch!
+ ROUNDRP  
+ CURLYLP  
+ CHAR  <ID: k >  SEMICOLON 
+Here in append_list k
+k Value
+ 
+ CURLYRP ----------------
+
+Name	Type	Parameters	Variables
+Entry Number: 1
+main	void
+Parameters:
+Variables:
+a	simple	variable	2	int
+b	simple	variable	2	int
+c	simple	variable	2	char
+d	simple	variable	2	char
+k	simple	variable	3	char
+Variable a
+Variable b
+Variable c
+Variable d
+Variable k
+ SEMICOLON  
+ CURLYRP ----------------
+
+Name	Type	Parameters	Variables
+Entry Number: 1
+main	void
+Parameters:
+Variables:
+a	simple	variable	2	int
+b	simple	variable	2	int
+c	simple	variable	2	char
+d	simple	variable	2	char
