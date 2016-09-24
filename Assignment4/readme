@@ -1,0 +1,3 @@
+▪  Developed a compiler for a subset of C with conditionals, loops, procedure calls and scoping.
+▪  It included Lexical Analyzer, Syntax Analyzer and Semantic Analyzer.
+▪  Languages/Technologies used: C++, flex, yacc.
